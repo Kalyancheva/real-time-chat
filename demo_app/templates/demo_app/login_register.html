@@ -1,0 +1,33 @@
+{% extends "demo_app/main.html"%}
+{% block content%}
+
+{%if messages%}
+    <ul class="'messages">
+        {%for message in messages%}
+        <li>{{message}}</li>
+        {%endfor%}
+    </ul>
+    {%endif%}
+{%if page == 'login' %}
+<div>
+    <form method="POST" action="">
+        {% csrf_token %}
+        <label for="username">Username: </label>
+        <input type="text" name="username" placeholder="Enter username">
+        <label for="password">Password: </label>
+        <input type="password" name="password" placeholder="Enter password">
+        <input type="submit" value="Login">
+        <p>Haven't signed up yet</p>
+        <a href="/register">signup</a>
+    </form>
+</div>
+{%else%}
+<div>
+    <form method="POST" action="">
+        {% csrf_token %}
+        {{form.as_p}}
+        <input type="submit" value="register">
+    </form>
+</div>
+{%endif%}
+{% endblock%}

@@ -1,0 +1,17 @@
+<!-- <div> -->
+
+    
+    
+    <h3>Avaliable Rooms</h3>
+    <hr>
+    {%for room in rooms%}
+    <a href="/update-room/{{room.id}}">edit</a>
+    <a href="/delete-room/{{room.id}}">delete</a>
+    <h3><a href="user-profile/{{room.host.id}}">@{{room.host.username}}</a></h3>
+    <h4>{{room.id}} ------ <a href="/rooms/{{room.id}}">{{room.name}}</a></h4>
+    <span>{{room.topic.name}}</span><br>
+    <span>{{room.participants.all.count}} joined</span>
+    <hr>
+    
+    {%endfor%}
+<!-- </div> -->

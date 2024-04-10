@@ -1,0 +1,23 @@
+{%extends 'demo_app/main.html' %}
+{% block content %}
+<style>
+    .profile-container{
+        display: grid;
+        grid-template-columns: 1fr 3fr 1fr;
+    }
+</style>
+<h1>@{{user.username}}</h1>
+<div class="profile-container">
+<div>
+<!-- <h1>hello</h1> -->
+{%include 'demo_app/topics_component.html'%}
+</div>
+<div>
+{%include 'demo_app/feed_component.html'%}
+</div>
+<div>
+    {%include 'demo_app/activity_component.html'%}
+</div>
+
+</div>
+{%endblock%}

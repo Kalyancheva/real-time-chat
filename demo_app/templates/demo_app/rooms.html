@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .room-container{
+            display: grid;
+            grid-template-columns: 3fr 2fr;
+        }
+        .participants-div{
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    {% include "demo_app/navbar.html" %}
+    <h2>Rooms Page</h2>
+    
+
+    <h1>{{rooms.name}}</h1>
+    <div class="room-container">
+
+        <div class="comment-wrapper">
+            <h3>Conversation</h3>
+        <hr>
+        {%for message in room_messages%}
+        <div>
+            <small>@{{message.user}}    {{message.created|timesince}} ago</small><br>
+            <span>{{message.body}}</span>
+            {% if request.user == message.user %}
+            <a href="/delete-message/{{message.id}}">Delete</a>
+            {%endif%}
+            <hr>
+        </div>
+        {%endfor%}
+        {%if request.user.is_authenticated%}
+        <div class="comment-form">
+            <form method="POST" action="">
+                {%csrf_token%}
+            <input type="text" name="body" placeholder="write your message here..">
+            <input type="submit" value="POST">
+        </form>
+    </div>
+    
+    
+    {%endif%}
+    <!-- <h4>{{room.id}} ------ <a href="/rooms/{{room.id}}">{{room.name}}</a></h4> -->
+</div>
+    <div class="participants-div">
+        <h3>participants</h3>
+        {%for member in participants%}
+        <div>@{{member.username}}
+        </div>
+        {%endfor%}
+        <hr>
+    </div>
+</div>
+</body>
+</html>
